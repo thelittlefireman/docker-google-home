@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
-env http_proxy http://10.35.255.65:8080
-env https_proxy http://10.35.255.65:10443
+#env http_proxy http://10.35.255.65:8080
+#env https_proxy http://10.35.255.65:10443
 
 # install python env
 # install deps + google assistant
