@@ -3,6 +3,11 @@ FROM ubuntu:latest
 #env http_proxy http://10.35.255.65:8080
 #env https_proxy http://10.35.255.65:10443
 
+ENV \
+    LC_ALL=C.UTF-8 \
+    LANG=C.UTF-8 \
+    LANGUAGE=C.UTF-8
+
 # install python env
 # install deps + google assistant
 RUN apt-get update \
@@ -22,12 +27,12 @@ RUN apt-get remove -y --purge python3-pip python3-dev \
 
 RUN mkdir /google-assistant
 
-WORKDIR /google-assistant
+VOLUME /google-assistant
 #
-CMD cp /google-assistant/asoundrc.config /root/.asoundrc | true \
-. /env/bin/activate google-oauthlib-tool \
+#CMD cp /google-assistant/asoundrc.config /root/.asoundrc | true && \
+CMD . /env/bin/activate && google-oauthlib-tool \
 --client-secrets /google-assistant/clientid.json \
 --scope https://www.googleapis.com/auth/assistant-sdk-prototype \
 --save \
 --headless \
-&& . /env/bin/activate googlesamples-assistant-hotword
+&& googlesamples-assistant-hotword
